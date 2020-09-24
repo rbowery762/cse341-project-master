@@ -21,6 +21,7 @@ const app = express();
 // Route setup. You can implement more in the future!
 //Proves
 const pr01Routes = require('./routes/pr01');
+const pr02Routes = require('./routes/pr02');
 //Teams
 const ta01Routes = require('./routes/ta01');
 const ta02Routes = require('./routes/ta02');
@@ -36,8 +37,11 @@ app.use(express.static(path.join(__dirname, 'public')))
    //.engine('hbs', expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'})) // For handlebars
    //.set('view engine', 'hbs')
    .use(bodyParser({extended: false})) // For parsing the body of a POST
-   .use('/ta01', ta01Routes)
+   //Prove routes
    .use('/pr01', pr01Routes)
+   .use('/pr02', pr02Routes)
+   //Team routes
+   .use('/ta01', ta01Routes)
    .use('/ta02', ta02Routes) 
    .use('/ta03', ta03Routes) 
    .use('/ta04', ta04Routes)

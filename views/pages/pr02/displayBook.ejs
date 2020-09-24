@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <% include ../../includes/header.ejs %>
+</head>
+<body>
+    <% include ../../includes/nav.ejs %>
+    <div class="jumbotron text-center">
+        <div class="container">
+          <h1><%= title %></h1>
+
+        </div>
+        <div class="container"> 
+                <p><%= name %>, by <%= author %> <br>
+                Description: <%= description %> </p> 
+        </div>
+    </div>
+</body>
+</html>

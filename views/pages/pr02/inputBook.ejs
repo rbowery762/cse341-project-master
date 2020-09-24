@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <% include ../../includes/header.ejs %>
+</head>
+<body>
+    <% include ../../includes/nav.ejs %>
+    <div class="jumbotron text-center">
+        <div class="container">
+          <h1><%= title %></h1>
+          <form action="/pr02/submitBook" method="POST">
+            <h2>Book Title:</h2>
+            <br>
+            <input type="text" name="bookName">
+            <br>
+            <h2>Author Name: </h2>
+            <input type="text" name="authorName">
+            <br>
+            <h2>Book Description: </h2>
+            <textarea name="bookDescription"></textarea>
+            <br>
+            <button type="submit" name="submitBook">Submit</button>
+          </form>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -41,3 +41,35 @@
   width: 5rem;
   height: 5rem;
 }
+
+input {
+  color: #0065BD;
+  border: 3px solid white;
+}
+
+button {
+  color: #0065BD;
+  border: 3px solid white;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  border: 3px solid gray;
+  background-color: gray;
+  color: white;
+}
+
+textarea {
+  color: #0065BD;
+  overflow: auto;
+  resize: none;
+  width: 40%;
+  height: 140px;
+  margin: 20px;
+  border: 3px solid white;
+}
+
+input[type=text]:focus, input[type=textarea]:focus {
+  border: 3px solid gray;
+}
