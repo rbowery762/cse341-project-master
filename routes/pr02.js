@@ -24,7 +24,7 @@ router.post('/submitBook',(req, res, next) => {
 });
 
 router.get('/displayBook',(req, res, next) => { 
-    console.log("Test");
+    console.log("Test2");
     res.render('pages/pr02/displayBook', { 
         title: 'Prove 02', 
         path: '/pr02', // For pug, EJS 
