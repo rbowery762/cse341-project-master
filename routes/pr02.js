@@ -12,7 +12,7 @@ router.get('/',(req, res, next) => {
     });
 });
 
-router.post('/submitBook',(req, res, next) => {
+router.post('/submitBook',(req, res, next) => { 
     if(req.body.bookName != ""){
     bookName = req.body.bookName;}
     if(req.body.authorName != ""){
