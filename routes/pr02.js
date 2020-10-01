@@ -6,7 +6,7 @@ let authorName = "Anonymous";
 let bookDescription = "None";
 
 router.get('/',(req, res, next) => {
-    res.render('pages/pr02/inputBook', { 
+    res.render('pages/pr02/inputBook', {  
         title: 'Prove 02', 
         path: '/pr02', // For pug, EJS 
     });
