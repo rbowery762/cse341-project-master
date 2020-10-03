@@ -75,8 +75,11 @@ input[type=text]:focus, input[type=textarea]:focus {
 }
 
 .item img {
+  display: block;
   max-width: 30%;
 }
+
 ul {
   list-style-type: none;
+  display: block;
 }

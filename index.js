@@ -20,13 +20,14 @@ const app = express();
 
 // Route setup. You can implement more in the future!
 //Proves
-const pr01Routes = require('./routes/pr01');
-const pr02Routes = require('./routes/pr02');
+const pr01Routes = require('./routes/pr01C');
+const pr02Routes = require('./routes/pr02C');
+const pr03Routes = require('./routes/pr03C');
 //Teams
-const ta01Routes = require('./routes/ta01');
-const ta02Routes = require('./routes/ta02');
-const ta03Routes = require('./routes/ta03'); 
-const ta04Routes = require('./routes/ta04'); 
+const ta01Routes = require('./routes/ta01C');
+const ta02Routes = require('./routes/ta02C');
+const ta03Routes = require('./routes/ta03C'); 
+const ta04Routes = require('./routes/ta04C'); 
 
 app.use(express.static(path.join(__dirname, 'public')))
    .set('views', path.join(__dirname, 'views'))
@@ -40,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')))
    //Prove routes
    .use('/pr01', pr01Routes)
    .use('/pr02', pr02Routes)
+   .use('/pr03', pr03Routes)
    //Team routes
    .use('/ta01', ta01Routes)
    .use('/ta02', ta02Routes) 

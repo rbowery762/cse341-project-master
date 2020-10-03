@@ -1,0 +1,123 @@
+[
+    {
+      "tags": [
+        "Ore",
+        "Earth",
+        "Machines",
+        "Tech",
+        "Metal"
+      ],
+      "imageURL": "/images/Osmium-crystals.png",
+      "price": 10.99,
+      "name": "Osmium Ore",
+      "description": "A tough metal ore used in complex machinary, particularly the Mekanical kind. Breathe in deeply!",
+      "note": "",
+      "alsoBought": [
+          "Tree Bean"
+      ],
+      "ID": 0
+    },
+    {
+      "tags": [
+        "Pottery",
+        "Spooky",
+        "Woods",
+        "Probably not cursed"
+      ],
+      "imageURL": "/images/vase.jpg",
+      "price": 0.99,
+      "name": "Mysterious Vase",
+      "description": "idk man I found it in the woods",
+      "note": "",
+      "alsoBought": [
+        "Tree Bean",
+        "Crucifix"
+        ],
+        "ID": 1
+    },
+    {
+        "tags": [
+          "Bean",
+          "Tree",
+          "Food?",
+          "Woods"
+        ],
+        "imageURL": "/images/tree_bean.jpg",
+        "price": 20.00,
+        "name": "Tree Bean",
+        "description": "It looks more like a pea pod tbh but \"Tree Bean\" sounded better.",
+        "note": "",
+        "alsoBought": [
+            "Tree Bean"
+        ],
+        "ID": 2
+    },
+    {
+        "tags": [
+          "Pet",
+          "Free",
+          "Probably cursed",
+          "Food?"
+        ],
+        "imageURL": "/images/cat.jpg",
+        "price": 0.00,
+        "name": "\"Cat\"",
+        "description": "He kept knocking my pills on the floor",
+        "note": "Note to whoever keeps adding the \"Food?\" tag: You're on thin ice.",
+        "alsoBought": [
+            "Spray Bottle",
+            "Crucifix"
+        ],
+        "ID": 3
+    },
+    {
+        "tags": [
+          "Water",
+          "Chemicals"
+        ],
+        "imageURL": "/images/spray_bottle.jpg",
+        "price": 5.00,
+        "name": "Spray Bottle",
+        "description": "To scare things away",
+        "note": "",
+        "alsoBought": [
+            "Tree Bean",
+            "Cat",
+            "Crucifix"
+        ],
+        "ID": 4
+    },
+    {
+        "tags": [
+          "Holy",
+          "Metal",
+          "Jewelry"
+        ],
+        "imageURL": "/images/crucifix.jpg",
+        "price": 3.00,
+        "name": "Crucifix",
+        "description": "To scare things away",
+        "note": "",
+        "alsoBought": [
+            "Tree Bean",
+            "Water Bottle",
+            "Cat"
+        ],
+        "ID": 5
+    },
+    {
+        "tags": [
+          "Food?",
+          "Pet"
+        ],
+        "imageURL": "/images/cat_food.jpg",
+        "price": 0.99,
+        "name": "Cat Food",
+        "description": "Cat Food. Obtained legally.",
+        "note": "",
+        "alsoBought": [
+            "Tree Bean"
+        ],
+        "ID": 5
+    }
+]

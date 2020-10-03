@@ -7,7 +7,7 @@ const userList = ['Dragon', 'Cat', '99'];
 let errorMessage;
 
 router.get('/',(req, res, next) => {
-    res.render('pages/ta02', { 
+    res.render('pages/ta02V', { 
         title: 'Team Activity 02', 
         path: '/ta02', // For pug, EJS 
         users: userList,

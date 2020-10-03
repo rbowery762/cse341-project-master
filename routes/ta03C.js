@@ -1,7 +1,6 @@
-//TA03 PLACEHOLDER
 const express = require('express');
 const router = express.Router();
-const Items = require('../models/items')
+const Items = require('../models/ta03M')
 
 router.get('/',(req, res, next) => {
     const items = new Items();
@@ -12,7 +11,7 @@ router.get('/',(req, res, next) => {
         } 
         else{
             const itemsData = JSON.parse(data);
-            res.render('pages/ta03', { 
+            res.render('pages/ta03V', { 
                 title: 'Team Activity 03', 
                 path: '/ta03', // For pug, EJS 
                 itemList: itemsData
