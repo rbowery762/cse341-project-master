@@ -13,6 +13,29 @@
   </div>
 </div>
 <div class="container">
+  <form action="/ta03" method="POST">
+    <input type="text">
+    <button type="submit" >Submit</button>
+  </form>
+</div>
+<div class="container">
+    <ul>
+      <% for(i = 0; i < itemList.length; i++){ %>
+        <li class="item">
+          <h2><%= itemList[i].name %> </h2>
+          <img src= <%= itemList[i].imageUrl %>>
+          <p class="itemDesc">Description: <%= itemList[i].description %> </p>
+          <p class="itemPrice">Price: <%= itemList[i].price %></p>
+          <p class="itemTags">Tags: 
+            <% for(j = 0; j < itemList[i].tags.length; j++) { %> 
+            <%=itemList[i].tags[j]%>
+            <% if((j + 1) != itemList[i].tags.length) { %>,
+            <% }} %> 
+          </p>
+            
+        </li> 
+      <% } %>
+    </ul>
   
 </div>
 
