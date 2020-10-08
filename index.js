@@ -15,7 +15,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localhost:5000
-const cors = require('cors') // Place this with other requires (like 'path' and 'express')
+const cors = require('cors'); // Place this with other requires (like 'path' and 'express')
+const mongoose = require('mongodb');
 
 const app = express();
 
@@ -57,7 +58,7 @@ mongoose
   .catch(err => {
     console.log(err);
   });
-  
+
 
 app.use(express.static(path.join(__dirname, 'public')))
    .set('views', path.join(__dirname, 'views'))
