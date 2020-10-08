@@ -52,7 +52,7 @@ mongoose
   .connect(
     MONGODB_URL, options
   )
-  .then(result => { // This should be your user handling code implement following the course videos
+  .then(result => { // This should be your user handling code implement following the course videos 
     app.listen(PORT);
   })
   .catch(err => {
