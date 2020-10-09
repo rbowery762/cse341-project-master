@@ -15,24 +15,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localhost:5000
+const mongoose = require('mongoose');
 const cors = require('cors'); // Place this with other requires (like 'path' and 'express')
-const mongoose = require('mongodb');
-
 const app = express();
 
-// Route setup. You can implement more in the future!
-//Proves
-const pr01Routes = require('./routes/pr01C');
-const pr02Routes = require('./routes/pr02C');
-const pr03Routes = require('./routes/pr03C');
-//Teams
-const ta01Routes = require('./routes/ta01C');
-const ta02Routes = require('./routes/ta02C');
-const ta03Routes = require('./routes/ta03C'); 
-const ta04Routes = require('./routes/ta04C'); 
-
 const corsOptions = {
-    origin: "https://<your_app_name>.herokuapp.com/",
+    origin: "https://cse341-project-master.herokuapp.com/",
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
@@ -45,19 +33,32 @@ const options = {
   family: 4
 };
 
-const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://Dragoncat99:Dragoncat99@cse341cluster-3dwlw.mongodb.net/test?retryWrites=true&w=majority";
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://Dragoncat99:Echomoon11@cluster0.ma3ou.mongodb.net/<dbname>?retryWrites=true&w=majority&authSource=admin";
 
 
 mongoose
   .connect(
     MONGODB_URL, options
   )
-  .then(result => { // This should be your user handling code implement following the course videos 
+  .then(result => { 
+    // This should be your user handling code implement following the course videos 
     app.listen(PORT);
   })
   .catch(err => {
     console.log(err);
   });
+
+
+// Route setup. You can implement more in the future!
+//Proves
+const pr01Routes = require('./routes/pr01C');
+const pr02Routes = require('./routes/pr02C');
+const pr03Routes = require('./routes/pr03C');
+//Teams
+const ta01Routes = require('./routes/ta01C');
+const ta02Routes = require('./routes/ta02C');
+const ta03Routes = require('./routes/ta03C'); 
+const ta04Routes = require('./routes/ta04C'); 
 
 
 app.use(express.static(path.join(__dirname, 'public')))
