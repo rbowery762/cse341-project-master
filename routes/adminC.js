@@ -95,7 +95,7 @@ router.post('/products/addProduct', (req, res, next) => {
     const description = req.body.description;
     const imageURL = req.body.imageURL;
     const product = new Product({
-        title: title, 
+        title: title,  
         price: price, 
         description: description,
         imageURL: imageURL
