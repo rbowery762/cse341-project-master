@@ -36,24 +36,12 @@ const options = {
 const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://Dragoncat99:Echomoon11@cluster0.ma3ou.mongodb.net/<dbname>?retryWrites=true&w=majority&authSource=admin";
 
 
-mongoose
-  .connect(
-    MONGODB_URL, options
-  )
-  .then(result => { 
-    // This should be your user handling code implement following the course videos 
-    app.listen(PORT);
-  })
-  .catch(err => {
-    console.log(err); 
-  });
-
-
 // Route setup. You can implement more in the future!
 //Proves
 const pr01Routes = require('./routes/pr01C');
 const pr02Routes = require('./routes/pr02C');
 const pr03Routes = require('./routes/pr03C');
+const adminRoutes = require('./routes/adminC');
 //Teams
 const ta01Routes = require('./routes/ta01C');
 const ta02Routes = require('./routes/ta02C');
@@ -69,11 +57,12 @@ app.use(express.static(path.join(__dirname, 'public')))
    // For view engine as hbs (Handlebars)
    //.engine('hbs', expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'})) // For handlebars
    //.set('view engine', 'hbs')
-   .use(bodyParser({extended: false})) // For parsing the body of a POST
+   .use(bodyParser.urlencoded({extended: false})) // For parsing the body of a POST
    //Prove routes
    .use('/pr01', pr01Routes)
    .use('/pr02', pr02Routes)
    .use('/pr03', pr03Routes)
+   .use('/admin', adminRoutes)
    //Team routes
    .use('/ta01', ta01Routes)
    .use('/ta02', ta02Routes) 
@@ -86,5 +75,18 @@ app.use(express.static(path.join(__dirname, 'public')))
    .use((req, res, next) => {
      // 404 page
      res.render('pages/404', {title: '404 - Page Not Found', path: req.url})
-   })
-   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+   });
+
+   mongoose
+  .connect(
+    MONGODB_URL, options
+  )
+  .then(result => { 
+    // This should be your user handling code implement following the course videos 
+    app.listen(PORT);
+  })
+  .catch(err => {
+    console.log(err); 
+  });
+
+
