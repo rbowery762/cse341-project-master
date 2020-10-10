@@ -33,7 +33,7 @@ const options = {
   family: 4
 };
 
-const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://Dragoncat99:Echomoon11@cluster0.ma3ou.mongodb.net/<dbname>?retryWrites=true&w=majority&authSource=admin";
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://Dragoncat99:Echomoon11@cluster0.ma3ou.mongodb.net/shop?retryWrites=true&w=majority&authSource=admin";
 
 
 // Route setup. You can implement more in the future!
@@ -42,6 +42,7 @@ const pr01Routes = require('./routes/pr01C');
 const pr02Routes = require('./routes/pr02C');
 const pr03Routes = require('./routes/pr03C');
 const adminRoutes = require('./routes/adminC');
+const shopRoutes = require('./routes/shopC');
 //Teams
 const ta01Routes = require('./routes/ta01C');
 const ta02Routes = require('./routes/ta02C');
@@ -63,6 +64,7 @@ app.use(express.static(path.join(__dirname, 'public')))
    .use('/pr02', pr02Routes)
    .use('/pr03', pr03Routes)
    .use('/admin', adminRoutes)
+   .use('/shop', shopRoutes)
    //Team routes
    .use('/ta01', ta01Routes)
    .use('/ta02', ta02Routes) 

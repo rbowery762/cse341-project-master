@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+  </div>
+</div>
+<div class="container">
+  <div class="item">
+      <h2><%= product.name %> </h2>
+      <img src= <%= product.imageURL %>>
+      <p class="itemPrice">
+      <% if(product.price == 0){ %>
+          FREE
+          <%} else {%>
+          $<%= parseFloat(product.price).toFixed(2) %>
+          <% } %>
+      </p>
+      <p class="itemDesc">Description: <%= product.description %> </p>
+    </div>
+</div>
+  <div>
+    <form action="/admin/products/editProduct" method=get>
+        <button type="submit">Edit</button>
+        <input type="hidden" name="productID" value="<%= product._id %>">
+    </form>
+    <form action="/admin/products/deleteProduct" method=get>
+      <button type="submit">Delete</button>
+      <input type="hidden" name="productID" value="<%= product._id %>">
+    </form>
+  </div>
+</div>

@@ -1,11 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <% include ../../includes/header.ejs %>
 </head>
+
 <body>
-    
+  <% include ../../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+  </div>
+</div>
+<div class="container">
+    <form action="/admin/products/addProduct" method=get>
+        <button type="submit">Add Product</button>
+     </form>
+    <ul class="products">
+      <% for(i = 0; i < itemList.length; i++){ %>
+        <li class="item">
+                <h2><%= itemList[i].title %> </h2>             
+                <image src= "<%= itemList[i].imageURL %>"></image>
+
+                <form action="/admin/products/viewProduct" method=get>
+                   <button type="submit">View Details</button>
+                    <input type="hidden" name="productID" value="<%= itemList[i]._id %>">
+                </form>
+   
+                <p class="itemPrice">
+                    <% if(itemList[i].price == 0){ %>
+                    FREE
+                    <%} else {%>
+                        $<%= parseFloat(itemList[i].price).toFixed(2) %>
+                        <% } %>
+                </p>
+                <p class="itemDesc">Description: <%= itemList[i].description %> </p>
+            </form>
+        </li> 
+      <% } %>
+    </ul>
+</div>
+
+
 </body>
 </html>

@@ -74,7 +74,8 @@ input[type=text]:focus, input[type=textarea]:focus {
   border: 3px solid gray;
 }
 
-.item img {
+.item img,
+input[type=image] {
   display: block;
   max-width: 30%;
 }
@@ -82,4 +83,38 @@ input[type=text]:focus, input[type=textarea]:focus {
 ul {
   list-style-type: none;
   display: block;
+}
+
+
+.product-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+}
+
+.product-form label,
+.product-form input,
+.product-form textarea {
+  margin: 1rem 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+
+.product-form input,
+.product-form textarea {
+  margin: 1rem 0;
+  border: 1px solid #a1a1a1;
+  border-radius: 2px;
+}
+
+.product-form input:focus,
+.product-form textarea:focus {
+  margin: 1rem 0;
+  outline-color: #00695c;
+}
+
+.product-form button {
+  text-align: center;
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+  </div>
+</div>
+<div class="container">
+    <ul class="products">
+      <% for(i = 0; i < itemList.length; i++){ %>
+        <li class="item">
+          <h2><%= itemList[i].name %> </h2>
+          <img src= <%= itemList[i].imageURL %>>
+          <p class="itemPrice">
+            <% if(itemList[i].price == 0){ %>
+              FREE
+              <%} else {%>
+                $<%= parseFloat(itemList[i].price).toFixed(2) %>
+                <% } %>
+          </p>
+          <p class="itemDesc">Description: <%= itemList[i].description %> </p>
+        </li> 
+      <% } %>
+    </ul>
+</div>
+
+
+</body>
+</html>
