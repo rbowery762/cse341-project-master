@@ -89,7 +89,7 @@ router.get('/products/addProduct', (req, res, next) => {
 
 //router.get('/products', adminController.getProducts);
 
-router.post('/products/addProduct', (req, res, next) => {
+router.post('/products/addProduct', (req, res, next) => { 
     const title = req.body.title;
     const price = req.body.price;
     const description = req.body.description;
