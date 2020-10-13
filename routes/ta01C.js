@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
     res.write('<a href="ta01/stretch-2">Stretch 2 (Write Form input to text input)</a></br>');
     res.write('<a href="ta01/stretch-3">Stretch 3 (Add two number inputs together)</a></br>');
     res.write('</body>'); 
-    res.write('</html>');
+    res.write('</html>'); 
     return res.end(); // Return so you don't execute remaining code outside of if statement
 });
 
