@@ -8,14 +8,47 @@ router.get('/', (req, res, next) => {
         res.render('pages/shop/main', {
             itemList: products,
             pageTitle: 'Shop',
-            title: 'Prove 04', 
+            title: 'Shop', 
             path: '/shop',
-            editing: false
         });
     })
     .catch(err => {
         console.log(err);
     })
+});
+
+router.get('/cart', (req, res, next) => {
+    req.user.populate('cart.items.productID')
+    .execPopulate()
+    .then(user => {
+        res.render('pages/shop/cart', {
+            pageTitle: 'Cart',
+            title: 'Cart', 
+            path: '/cart',
+            itemList: user.cart.items
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    })
+});
+
+router.post('/cart', (req, res, next) => {
+    Product.findById(req.body.productID)    
+    .then(product => {
+        return req.user.addToCart(product, req.body.amount);
+      })
+      .then(result => {
+        res.redirect('/shop/cart'); 
+      });
+});
+
+router.post('/cartDelete', (req, res, next) => {
+    req.user.deleteFromCart(req.body.productID, req.body.amount)
+      .then(result => {
+        res.redirect('/shop/cart'); 
+      })
+      .catch(err => console.log(err));
 });
 
 module.exports = router;

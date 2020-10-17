@@ -94,11 +94,14 @@ router.post('/products/addProduct', (req, res, next) => {
     const price = req.body.price;
     const description = req.body.description;
     const imageURL = req.body.imageURL;
+    console.log('Logged in as', req.user);
+    const userID = req.user;
     const product = new Product({
         title: title,  
         price: price, 
         description: description,
-        imageURL: imageURL
+        imageURL: imageURL,
+        userID: userID
     });
     product.save()
     .then(result => {

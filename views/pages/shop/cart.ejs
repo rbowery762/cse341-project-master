@@ -15,20 +15,21 @@
     <ul class="products">
       <% for(i = 0; i < itemList.length; i++){ %>
         <li class="item">
-          <h2><%= itemList[i].name %> </h2>
-          <img src= <%= itemList[i].imageURL %>>
+          <h2><%= itemList[i].productID.title %> </h2>
+          <img src= <%= itemList[i].productID.imageURL %>>
           <p class="itemPrice">
-            <% if(itemList[i].price == 0){ %>
+            <% if(itemList[i].productID.price == 0){ %>
               FREE
             <%} else {%>
-              $<%= parseFloat(itemList[i].price).toFixed(2) %>
+              $<%= parseFloat(itemList[i].productID.price).toFixed(2) %>
             <% } %>
           </p>
-          <p class="itemDesc">Description: <%= itemList[i].description %> </p>
-          <form action="/shop/cart" method="POST">
-            <input type="number" name="amount" min="1">
+          <p class="itemDesc">Description: <%= itemList[i].productID.description %> </p>
+          <p>Number in cart: <%= itemList[i].quantity %></p>
+          <form action="/shop/cartDelete" method="POST">
             <input type="hidden" name="productID" value="<%= itemList[i]._id %>">
-            <button type="submit">Add to Cart</button>
+            <input type="number" name="amount" min="1" max="<%= itemList[i].quantity %>">
+            <button type="submit">Remove from Cart</button>
           </form>
         </li> 
       <% } %>
