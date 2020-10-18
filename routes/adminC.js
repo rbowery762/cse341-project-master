@@ -2,17 +2,20 @@ const path = require('path');
 const Product = require('../models/product');
 const express = require('express');
 const router = express.Router();
+const isAuth = require('../middleware/isAuth');
 
-router.get('/', (req, res, next) => {
+
+router.get('/', isAuth, (req, res, next) => {
     res.render('pages/admin/adminMain', {
         pageTitle: 'Admin Main',
         title: 'Prove 04', 
         path: '/main',
-        editing: false
+        editing: false,
+        isLoggedIn: req.session.loggedIn
     });
 });
 
-router.get('/products', (req, res, next) => {
+router.get('/products', isAuth, (req, res, next) => {
     Product.find()
     .then(products => {
         res.render('pages/admin/products', {
@@ -20,12 +23,13 @@ router.get('/products', (req, res, next) => {
             pageTitle: 'Admin Products',
             title: 'Prove 04', 
             path: '/products',
-            editing: false
+            editing: false,
+            isLoggedIn: req.session.loggedIn
         });
     });
 });
 
-router.get('/products/viewProduct', (req, res, next) => {
+router.get('/products/viewProduct', isAuth, (req, res, next) => {
     const productID = req.query.productID;
     Product.findById(productID)
     .then(product => {
@@ -34,12 +38,13 @@ router.get('/products/viewProduct', (req, res, next) => {
             pageTitle: 'View Product',
             title: 'Prove 04', 
             path: '/viewProduct',
-            editing: false
+            editing: false,
+            isLoggedIn: req.session.loggedIn
         });
     });
 });
 
-router.get('/products/editProduct', (req, res, next) => {
+router.get('/products/editProduct', isAuth, (req, res, next) => {
     const productID = req.query.productID;
     Product.findById(productID)
     .then(product => {
@@ -48,20 +53,19 @@ router.get('/products/editProduct', (req, res, next) => {
             pageTitle: 'Edit Product',
             title: 'Prove 04', 
             path: '/editProduct',
-            editing: true
+            editing: true,
+            isLoggedIn: req.session.loggedIn
         });
     });
 });
 
-router.post('/products/editProduct', (req, res, next) => {
+router.post('/products/editProduct', isAuth, (req, res, next) => {
     const productID = req.body.productID;
     const newTitle = req.body.title;
     const newPrice = req.body.price;
     const newDescription = req.body.description;
     const newImageURL = req.body.imageURL;
 
-    console.log(productID);
-    console.log(newTitle);
     Product.findById(productID)
     .then(product => {
         product.title = newTitle;
@@ -72,29 +76,28 @@ router.post('/products/editProduct', (req, res, next) => {
         return product.save()
     })
     .then(result => {
-        console.log('Updated product');
         res.redirect('/admin/products');
     })
     .catch(err => console.log(err));
 });
 
-router.get('/products/addProduct', (req, res, next) => {
+router.get('/products/addProduct', isAuth, (req, res, next) => {
     res.render('pages/admin/editProduct', {
         pageTitle: 'Add Product',
         title: 'Prove 04', 
         path: '/addProduct',
-        editing: false
+        editing: false,
+        isLoggedIn: req.session.loggedIn
     });
 });
 
 //router.get('/products', adminController.getProducts);
 
-router.post('/products/addProduct', (req, res, next) => { 
+router.post('/products/addProduct', isAuth, (req, res, next) => { 
     const title = req.body.title;
     const price = req.body.price;
     const description = req.body.description;
     const imageURL = req.body.imageURL;
-    console.log('Logged in as', req.user);
     const userID = req.user;
     const product = new Product({
         title: title,  
@@ -105,7 +108,6 @@ router.post('/products/addProduct', (req, res, next) => {
     });
     product.save()
     .then(result => {
-        console.log('Created Product');
         res.redirect('/admin/products');
     })
     .catch(err => {
@@ -113,12 +115,10 @@ router.post('/products/addProduct', (req, res, next) => {
     })
 });
 
-router.get('/products/deleteProduct', (req, res, next) => {
+router.get('/products/deleteProduct', isAuth, (req, res, next) => {
     const productID = req.query.productID;
-    console.log("Hi")
     Product.findByIdAndRemove(productID)
     .then(() => {
-        console.log('Product Deleted');
         res.redirect('/admin/products');
     })
     .catch(err => console.log(err));

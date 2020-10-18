@@ -11,19 +11,25 @@
     <h1><%= title %></h1>
   </div>
 </div>
-  <% if (errorMessage) {%>
+<% if (errorMessage) {%>
   <div class="container">
     <%= errorMessage %>
   </div>
   <%}%>
 <div class="container">
-    <form action="/login" method="POST">
+    <form action="/signup" method="POST">
       <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+        <!-- <label for="username">Username</label>
+        <Input type="text" name="username"> -->
         <label for="email">E-Mail</label>
         <Input type="text" name="email">
+          <label for="username">Username</label>
+          <Input type="text" name="username">
         <label for="password">Password</label>
         <Input type="text" name="password">
-        <button type="submit">Login</button>
+        <label for="passwordConfirm">Confirm Password</label>
+        <Input type="text" name="passwordConfirm">
+        <button type="submit">Sign Up</button>
     </form>
 </div>
 

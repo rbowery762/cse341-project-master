@@ -6,7 +6,8 @@ exports.getAddProduct = (req, res, next) => {
     res.render('admin/edit-product', {
         pageTitle: 'Add Product',
         path: '/admin/add-product',
-        editing: false
+        editing: false,
+        isLoggedIn: req.isLoggedIn
     });
 };
 
@@ -22,7 +23,6 @@ exports.postAddProduct = (req, res, next) => {
     imageURL: imageURL});
     product.save()
     .then(result => {
-        console.log('Created Product');
         res.redirect('/admin/products');
     })
     .catch(err => {

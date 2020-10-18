@@ -25,11 +25,14 @@
             <% } %>
           </p>
           <p class="itemDesc">Description: <%= itemList[i].description %> </p>
-          <form action="/shop/cart" method="POST">
-            <input type="number" name="amount" min="1">
-            <input type="hidden" name="productID" value="<%= itemList[i]._id %>">
-            <button type="submit">Add to Cart</button>
-          </form>
+          <% if(isLoggedIn){ %>
+            <form action="/shop/cart" method="POST">
+              <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+              <input type="number" name="amount" min="1">
+              <input type="hidden" name="productID" value="<%= itemList[i]._id %>">
+              <button type="submit">Add to Cart</button>
+            </form>
+          <%}%>
         </li> 
       <% } %>
     </ul>

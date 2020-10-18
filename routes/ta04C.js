@@ -7,7 +7,8 @@ router.get('/',(req, res, next) => {
         title: 'Team Activity 04', 
         path: '/ta04', // For pug, EJS 
         activeTA04: true, // For HBS
-        contentCSS: true, // For HBS
+        contentCSS: true, // For HBS,
+        isLoggedIn: req.session.loggedIn
     });
 });
 

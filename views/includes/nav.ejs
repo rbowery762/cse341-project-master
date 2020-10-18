@@ -31,6 +31,24 @@
             <li class="<%= path === '/admin' ? 'active' : ''%>"><a href="/admin">PR04</a></li>
           </ul>
       </li>
+      <% if(isLoggedIn){ %>
+      <li class="<%= path === '/logout' ? 'active' : ''%>">
+        <form action="/logout" method="POST">
+          <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+          <button type="submit">Logout</button>
+        </form>
+      </li>
+      <li class="<%= path === '/shop/cart' ? 'active' : ''%>">
+        <a href="/shop/cart">Cart</a>
+      </li>
+      <% } else{ %>
+        <li class="<%= path === '/login' ? 'active' : ''%>">
+          <a href="/login">Login</a>
+        </li>
+        <li class="<%= path === '/signup' ? 'active' : ''%>">
+          <a href="/signup">Sign Up</a>
+        </li>
+        <%}%>
     </ul>
   </div>
 </nav>

@@ -7,7 +7,8 @@ let bookInfo = new BookInfo;
 router.get('/',(req, res, next) => {
     res.render('pages/pr02V/inputBook', {  
         title: 'Prove 02', 
-        path: '/pr02', // For pug, EJS 
+        path: '/pr02', // For pug, EJS,
+        isLoggedIn: req.session.loggedIn
     });
 });
 
@@ -17,13 +18,13 @@ router.post('/submitBook',(req, res, next) => {
 });
 
 router.get('/displayBook',(req, res, next) => { 
-    console.log("Test2");
     res.render('pages/pr02V/displayBook', { 
         title: 'Prove 02', 
         path: '/pr02', // For pug, EJS 
         name: bookInfo.bookName,
         author: bookInfo.authorName,
-        description: bookInfo.bookDescription
+        description: bookInfo.bookDescription,
+        isLoggedIn: req.session.loggedIn
     });
 });
 

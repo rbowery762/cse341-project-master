@@ -14,7 +14,8 @@ router.get('/',(req, res, next) => {
             res.render('pages/ta03V', { 
                 title: 'Team Activity 03', 
                 path: '/ta03', // For pug, EJS 
-                itemList: itemsData
+                itemList: itemsData,
+                isLoggedIn: req.session.loggedIn
             });
         }
     });

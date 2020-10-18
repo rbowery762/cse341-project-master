@@ -1,6 +1,7 @@
 const Product = require('../models/product');
 const express = require('express');
 const router = express.Router();
+const isAuth = require('../middleware/isAuth');
 
 router.get('/', (req, res, next) => {
     Product.find()
@@ -9,7 +10,7 @@ router.get('/', (req, res, next) => {
             itemList: products,
             pageTitle: 'Shop',
             title: 'Shop', 
-            path: '/shop',
+            path: '/shop'
         });
     })
     .catch(err => {
@@ -17,7 +18,7 @@ router.get('/', (req, res, next) => {
     })
 });
 
-router.get('/cart', (req, res, next) => {
+router.get('/cart', isAuth, (req, res, next) => {
     req.user.populate('cart.items.productID')
     .execPopulate()
     .then(user => {
@@ -25,7 +26,8 @@ router.get('/cart', (req, res, next) => {
             pageTitle: 'Cart',
             title: 'Cart', 
             path: '/cart',
-            itemList: user.cart.items
+            itemList: user.cart.items,
+            isLoggedIn: req.session.loggedIn
         });
     })
     .catch(err => {
@@ -33,7 +35,7 @@ router.get('/cart', (req, res, next) => {
     })
 });
 
-router.post('/cart', (req, res, next) => {
+router.post('/cart', isAuth, (req, res, next) => {
     Product.findById(req.body.productID)    
     .then(product => {
         return req.user.addToCart(product, req.body.amount);
@@ -43,7 +45,7 @@ router.post('/cart', (req, res, next) => {
       });
 });
 
-router.post('/cartDelete', (req, res, next) => {
+router.post('/cartDelete', isAuth, (req, res, next) => {
     req.user.deleteFromCart(req.body.productID, req.body.amount)
       .then(result => {
         res.redirect('/shop/cart'); 

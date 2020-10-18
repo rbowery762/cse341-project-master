@@ -9,6 +9,7 @@
 <body>
   <p>Please input your first name and your last name:</p>
   <form action="/pr01/submit" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken%>">
       <input type="text" name="firstName">
       <br>
       <input type="text" name="lastName">

@@ -27,6 +27,7 @@
           <p class="itemDesc">Description: <%= itemList[i].productID.description %> </p>
           <p>Number in cart: <%= itemList[i].quantity %></p>
           <form action="/shop/cartDelete" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
             <input type="hidden" name="productID" value="<%= itemList[i]._id %>">
             <input type="number" name="amount" min="1" max="<%= itemList[i].quantity %>">
             <button type="submit">Remove from Cart</button>

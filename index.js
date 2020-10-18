@@ -20,12 +20,18 @@ const cors = require('cors'); // Place this with other requires (like 'path' and
 const app = express();
 const User = require('./models/user');
 const session = require('express-session');
+const csrf = require('csurf');
+const flash = require('connect-flash');
+
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const corsOptions = {
     origin: "https://cse341-project-master.herokuapp.com/",
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
+
+const csrfProtection = csrf();
 
 const options = {
   useUnifiedTopology: true,
@@ -37,7 +43,6 @@ const options = {
 
 const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://Dragoncat99:Echomoon11@cluster0.ma3ou.mongodb.net/shop?retryWrites=true&w=majority&authSource=admin";
 
-
 // Route setup. You can implement more in the future!
 //Proves
 const pr01Routes = require('./routes/pr01C');
@@ -46,7 +51,9 @@ const pr03Routes = require('./routes/pr03C');
 //Proper
 const adminRoutes = require('./routes/adminC');
 const shopRoutes = require('./routes/shopC');
-const loginRoutes = require('./routes/loginC')
+const loginRoutes = require('./routes/loginC');
+const logoutRoutes = require('./routes/logoutC');
+const signUpRoutes = require('./routes/signupC');
 //Teams
 const ta01Routes = require('./routes/ta01C');
 const ta02Routes = require('./routes/ta02C');
@@ -54,26 +61,45 @@ const ta03Routes = require('./routes/ta03C');
 const ta04Routes = require('./routes/ta04C'); 
 const ta05Routes = require('./routes/ta05C'); 
 
+
+const store = new MongoDBStore({
+  uri: MONGODB_URL,
+  collection: 'sessions'
+});
+
+app.set('views', path.join(__dirname, 'views'))
+.set('view engine', 'ejs');
+
 app.use(express.static(path.join(__dirname, 'public')))
-  .use((req, res, next) => {
-    User.findById('5f876bb6240b213aec3f9e16')
-      .then(user => {
-        req.user = user;
-        next();
-      })
-      .catch(err => console.log(err));
+.use(bodyParser.urlencoded({extended: false})) // For parsing the body of a POST
+.use(session({
+  secret: "UwU", 
+  resave: false, 
+  saveUninitialized: false,
+  store: store
+}));
+app.use(csrfProtection);
+
+app.use(flash());
+
+app.use((req, res, next) => {
+  if(!req.session.user){
+    return next(); 
+  }
+  console.log(req.session.user._id);
+  User.findById(req.session.user._id)
+    .then(user => {
+      req.user = user;
+      next();
     })
-   .set('views', path.join(__dirname, 'views'))
-   .set('view engine', 'ejs')
-   // For view engine as Pug
-   //.set('view engine', 'pug') // For view engine as PUG. 
-   // For view engine as hbs (Handlebars)
-   //.engine('hbs', expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'})) // For handlebars
-   //.set('view engine', 'hbs')
-   .use(bodyParser.urlencoded({extended: false})) // For parsing the body of a POST
-   .use(session({
-     secret: "UwU"
-   }))
+    .catch(err => console.log(err));
+});
+
+    app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.session.loggedIn;
+    res.locals.csrfToken = req.csrfToken();
+    next();
+    })
    //Prove routes
    .use('/pr01', pr01Routes)
    .use('/pr02', pr02Routes)
@@ -82,6 +108,8 @@ app.use(express.static(path.join(__dirname, 'public')))
    .use('/admin', adminRoutes)
    .use('/shop', shopRoutes)
    .use('/login', loginRoutes)
+   .use('/logout', logoutRoutes)
+   .use('/signup', signUpRoutes)
    //Team routes
    .use('/ta01', ta01Routes)
    .use('/ta02', ta02Routes) 
@@ -90,41 +118,26 @@ app.use(express.static(path.join(__dirname, 'public')))
    .use('/ta05', ta05Routes)
    .get('/', (req, res, next) => {
      // This is the primary index, always handled last. 
-     res.render('pages/index', {title: 'Welcome to my CSE341 repo', path: '/'});
+     res.render('pages/index', {
+        title: 'Welcome to my CSE341 repo', 
+        path: '/',
+        isLoggedIn: req.session.loggedIn});
     })
    .use((req, res, next) => {
      // 404 page
-     res.render('pages/404', {title: '404 - Page Not Found', path: req.url});
+     res.render('pages/404', {
+        title: '404 - Page Not Found', 
+        path: req.url,
+        isLoggedIn: req.session.loggedIn});
    });
 
-  //  app.use((req, res, next) => {
-  //    User.findById('5f876bb6240b213aec3f9e16')
-  //    .then(user => {
-  //      req.user = user;
-  //      next();
-  //    })
-  //    .catch(err => console.log(err));
-  //    console.log('Logged in as ', req.user);
-  //  });
+
 
    mongoose
   .connect(
     MONGODB_URL, options
   )
   .then(result => { 
-    User.findOne().then(user => {
-      if(!user){
-        const user = new User({
-          name: 'Rachel',
-          email: 'bow18018@byui.edu',
-          cart: {
-            items: []
-          }
-        });
-        user.save();
-      }
-    });
-
     // This should be your user handling code implement following the course videos 
     app.listen(PORT);
   })

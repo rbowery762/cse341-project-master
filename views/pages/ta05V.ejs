@@ -14,24 +14,28 @@
   <p>Counter: <%= counter %></p>
     <div>
         <form action="/ta05/change-style" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
             <input type="text" name="color">
             <button type="submit">submit</button>
         </form>
     </div>
     <div>
         <form action="/ta05/counter" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
             <input type="hidden" name="inc" value="increment">
             <button type="submit">Increment</button>
         </form>
     </div>
     <div>
         <form action="/ta05/counter" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
             <input type="hidden" name="dec" value="decrement">
             <button type="submit">Decrement</button>
         </form>
     </div>
     <div>
         <form action="/ta05/reset" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
             <button type="submit">Reset</button>
         </form>
     </div>

@@ -26,13 +26,17 @@
     </div>
 </div>
   <div>
+    <% if(isLoggedIn){ %>
     <form action="/admin/products/editProduct" method=get>
+      <input type="hidden" name="_csrf" value="<%= csrfToken%>">
         <button type="submit">Edit</button>
         <input type="hidden" name="productID" value="<%= product._id %>">
     </form>
     <form action="/admin/products/deleteProduct" method=get>
+      <input type="hidden" name="_csrf" value="<%= csrfToken%>">
       <button type="submit">Delete</button>
       <input type="hidden" name="productID" value="<%= product._id %>">
     </form>
+    <%}%>
   </div>
 </div>

@@ -85,6 +85,9 @@ ul {
   display: block;
 }
 
+input {
+  border-color: gray;
+}
 
 .product-form {
   width: 20rem;

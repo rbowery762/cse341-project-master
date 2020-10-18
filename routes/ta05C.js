@@ -15,7 +15,8 @@ router.get('/',(req, res, next) => {
         title: 'Team Activity 05', 
         path: '/ta05', // For pug, EJS 
         color: color,
-        counter: counter
+        counter: counter,
+        isLoggedIn: req.session.loggedIn
     });
 });
 

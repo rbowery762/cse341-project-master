@@ -14,7 +14,8 @@ router.get('/',(req, res, next) => {
             res.render('pages/pr03V/store.ejs', {  
                 title: 'Prove 03', 
                 path: '/pr03', // For pug, EJS 
-                itemList: itemsData
+                itemList: itemsData,
+                isLoggedIn: req.session.loggedIn
             });
         }
     });

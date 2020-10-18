@@ -10,6 +10,7 @@
   <div class="container">
     <h1><%= title %></h1>
     <form action="/ta02/addUser" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken%>">
       <input type="text" name="newUser">
       <button type="submit" name="submitUserName">Submit</button>
     </form>
@@ -23,6 +24,7 @@
     <div class="container">
       <h2> Delete User: </h2>
       <form action="/ta02/removeUser" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken%>">
         <input type="text" name="removeUser">
         <button type="submit" name="removeUsername" >Remove</button>
       </form>
