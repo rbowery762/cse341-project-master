@@ -11,7 +11,9 @@
     <h1><%= title %></h1>
   </div>
 </div>
+<% console.log(itemList); %>
 <div class="container">
+  <% if (itemList.length > 0) { %>
     <ul class="products">
       <% for(i = 0; i < itemList.length; i++){ %>
         <li class="item">
@@ -28,13 +30,16 @@
           <p>Number in cart: <%= itemList[i].quantity %></p>
           <form action="/shop/cartDelete" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken%>">
-            <input type="hidden" name="productID" value="<%= itemList[i]._id %>">
+            <input type="hidden" name="deleteID" value="<%= itemList[i].productID._id %>">
             <input type="number" name="amount" min="1" max="<%= itemList[i].quantity %>">
             <button type="submit">Remove from Cart</button>
           </form>
         </li> 
       <% } %>
     </ul>
+  <% } else { %>
+    <h2>No items found!</h2>
+  <% } %>
 </div>
 
 

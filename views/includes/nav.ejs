@@ -31,6 +31,9 @@
             <li class="<%= path === '/admin' ? 'active' : ''%>"><a href="/admin">PR04</a></li>
           </ul>
       </li>
+      <li class="<%= path === '/shop' ? 'active' : ''%>">
+        <a href="/shop">Shop</a>
+      </li>
       <% if(isLoggedIn){ %>
       <li class="<%= path === '/logout' ? 'active' : ''%>">
         <form action="/logout" method="POST">
@@ -40,6 +43,9 @@
       </li>
       <li class="<%= path === '/shop/cart' ? 'active' : ''%>">
         <a href="/shop/cart">Cart</a>
+      </li>
+      <li class="<%= path === '/admin/adminMain' ? 'active' : ''%>">
+        <a href="/admin">Admin</a>
       </li>
       <% } else{ %>
         <li class="<%= path === '/login' ? 'active' : ''%>">

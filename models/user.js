@@ -17,8 +17,15 @@ const userSchema = new Schema ({
     },
     cart: {
         items: [{
-            productID: {type: Schema.Types.ObjectId, ref: 'Product', required: true}, 
-            quantity: { type: Number, required: true}
+            productID: {
+                type: Schema.Types.ObjectId, 
+                ref: 'Product', 
+                required: true
+            }, 
+            quantity: { 
+                type: Number, 
+                required: true
+            }
         }]
     }
 });
@@ -47,15 +54,18 @@ userSchema.methods.addToCart = function(product, amount){
     return this.save();
 };
 
-userSchema.methods.deleteFromCart = function(productID, amount){
+userSchema.methods.deleteFromCart = function(deleteID, amount){
     let updatedCartItems = [...this.cart.items];
     const index = this.cart.items.findIndex(item => {
-        return item._id.toString() === productID.toString();
+        console.log(item._id);
+        console.log(item._deleteID);
+        console.log(deleteID);
+        return item.productID._id.toString() === deleteID.toString();
     });
 
     if((updatedCartItems[index].quantity - amount) <= 0){
         updatedCartItems = this.cart.items.filter(item => {
-            return item._id.toString() !== productID.toString();
+            return item.productID._id.toString() !== deleteID.toString();
         });
     } else {
         updatedCartItems[index].quantity -= amount;
