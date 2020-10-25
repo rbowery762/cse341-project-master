@@ -15,6 +15,8 @@ const userSchema = new Schema ({
         type:String,
         required: true
     },
+    resetToken: String,
+    resetTokenExpiration: Date,
     cart: {
         items: [{
             productID: {
@@ -57,9 +59,9 @@ userSchema.methods.addToCart = function(product, amount){
 userSchema.methods.deleteFromCart = function(deleteID, amount){
     let updatedCartItems = [...this.cart.items];
     const index = this.cart.items.findIndex(item => {
-        console.log(item._id);
-        console.log(item._deleteID);
-        console.log(deleteID);
+    //    console.log(item._id);
+    //    console.log(item._deleteID);
+    //    console.log(deleteID);
         return item.productID._id.toString() === deleteID.toString();
     });
 

@@ -3,18 +3,29 @@ const User = require('../models/user');
 const router = express.Router();
 const encrypt = require('bcryptjs');
 
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
+
+const transporter = nodemailer.createTransport(sendgridTransport({
+    auth: {
+        api_key: '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'
+    }
+}));
+
 router.get('/',(req, res, next) => {
-    // if(message.length > 0){
-    //     message = message[0];
-    // }
-    // else {
-    //     message = null;
-    // }
+    let message = req.flash('error');
+
+    if(message.length > 0){
+        message = message[0];
+    }
+    else {
+        message = null;
+    }
 
     res.render('pages/signupV', { 
         title: 'Sign Up', 
         path: '/signup', // For pug, EJS,
-        errorMessage: req.flash('error')
+        errorMessage: message
     });
 });
 
@@ -45,8 +56,15 @@ router.post('/',(req, res, next) => {
             return user.save();
         })
         .then(result => {
-            return res.redirect('/login');
-        });
+            res.redirect('/login');
+            return transporter.sendMail({
+                to: email,
+                from: 'dragoncat99@icloud.com',
+                subject: 'Thank your for signing up for our service!',
+                html: '<h1> You successfully signed up!</h1>'
+            });
+        })
+        .catch(err => {console.log(err);});
     })
     .catch(err => {console.log(err);});
 });

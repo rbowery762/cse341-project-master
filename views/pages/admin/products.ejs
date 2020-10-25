@@ -20,6 +20,7 @@
      <%}%>
     <ul class="products">
       <% for(i = 0; i < itemList.length; i++){ %>
+        <% if(itemList[i].userID.toString() === user._id.toString()) { %>
         <li class="item">
                 <h2><%= itemList[i].title %> </h2>             
                 <image src= "<%= itemList[i].imageURL %>"></image>
@@ -29,6 +30,20 @@
                    <button type="submit">View Details</button>
                     <input type="hidden" name="productID" value="<%= itemList[i]._id %>">
                 </form>
+                <div>
+                  <% if(isLoggedIn){ %>
+                  <form action="/admin/products/editProduct" method=get>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                      <button type="submit">Edit</button>
+                      <input type="hidden" name="productID" value="<%= itemList[i]._id %>">
+                  </form>
+                  <form action="/admin/products/deleteProduct" method=get>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                    <button type="submit">Delete</button>
+                    <input type="hidden" name="productID" value="<%= itemList[i]._id %>">
+                  </form>
+                  <%}%>
+                </div>
    
                 <p class="itemPrice">
                     <% if(itemList[i].price == 0){ %>
@@ -40,6 +55,7 @@
                 <p class="itemDesc">Description: <%= itemList[i].description %> </p>
             </form>
         </li> 
+        <%}%>
       <% } %>
     </ul>
 </div>

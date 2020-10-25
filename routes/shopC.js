@@ -24,7 +24,7 @@ router.get('/cart', isAuth, (req, res, next) => {
     req.user.populate('cart.items.productID')
     .execPopulate()
     .then(user => {
-        console.log(user.cart.items);
+ //       console.log(user.cart.items);
         const products = user.cart.items;
 
         res.render('pages/shop/cart', {
@@ -46,7 +46,7 @@ router.post('/cart', isAuth, (req, res, next) => {
         return req.user.addToCart(product, req.body.amount);
       })
       .then(result => {
-        res.redirect('/shop/cart'); 
+        res.redirect('/shop'); 
       });
 });
 

@@ -15,7 +15,7 @@
     <ul class="products">
       <% for(i = 0; i < itemList.length; i++){ %>
         <li class="item">
-          <h2><%= itemList[i].name %> </h2>
+          <h2><%= itemList[i].title %> </h2>
           <img src= <%= itemList[i].imageURL %>>
           <p class="itemPrice">
             <% if(itemList[i].price == 0){ %>
