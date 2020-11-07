@@ -142,3 +142,20 @@ input {
 .product-form button {
   text-align: center;
 }
+
+.pagination {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: var(--main-bg-color);
+  padding: 0.5rem;
+  border: 1px solid green;
+  margin: 0 1rem;
+}
+.pagination a:active {
+  background: darkblue;
+  color: white;
+}

@@ -48,6 +48,7 @@ const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://Dragoncat99:Echomo
 const pr01Routes = require('./routes/pr01C');
 const pr02Routes = require('./routes/pr02C');
 const pr03Routes = require('./routes/pr03C');
+const pr08Routes = require('./routes/pr08C');
 //Proper
 const adminRoutes = require('./routes/adminC');
 const shopRoutes = require('./routes/shopC');
@@ -105,6 +106,7 @@ app.use((req, res, next) => {
    .use('/pr01', pr01Routes)
    .use('/pr02', pr02Routes)
    .use('/pr03', pr03Routes)
+   .use('/pr08', pr08Routes)
    //Proper routes
    .use('/admin', adminRoutes)
    .use('/shop', shopRoutes)
