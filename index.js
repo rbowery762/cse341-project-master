@@ -75,6 +75,7 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.use(express.static(path.join(__dirname, 'public')))
 .use(bodyParser.urlencoded({extended: false})) // For parsing the body of a POST
+.use(bodyParser.json())
 .use(session({
   secret: "UwU", 
   resave: false, 
