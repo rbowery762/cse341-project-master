@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+  </div>
+</div>
+<div class="container">
+    <ul class="products">
+      <% for(i = 0; i < itemList.length; i++){ %>
+        <li class="item">
+          <h2><%= itemList[i].title %> </h2>
+          <img src= <%= itemList[i].imageUrl %>>
+          <p class="itemPrice">
+            <% if(itemList[i].price == 0){ %>
+              FREE
+            <%} else {%>
+              $<%= parseFloat(itemList[i].price).toFixed(2) %>
+            <% } %>
+          </p>
+          <p class="itemDesc">Description: <%= itemList[i].description %> </p>
+          <!-- <p class="itemTags">Tags: 
+            <% for(j = 0; j < itemList[i].tags.length; j++) { %> 
+            <%=itemList[i].tags[j]%>
+            <% if((j + 1) != itemList[i].tags.length) { %>,
+            <% }} %> 
+          </p> -->
+        </li> 
+      <% } %>
+    </ul>
+</div>
+<section class="pagination">
+    <% if (currentPage != 1) { %>
+        <a href="/pr08/?page=1">1</a>
+    <% } %>
+    <% if (hasPreviousPage && (previousPage != 1)) { %>
+        <a href="/pr08/?page=<%= previousPage %>"><%= previousPage %></a>
+    <% } %>
+      <a href="/pr08/?page=<%= currentPage %>" class="active"><%= currentPage %></a>
+    <% if (hasNextPage && ((currentPage + 1 != lastPage))) { %>
+       <a href="/pr08/?page=<%= nextPage %>"><%= nextPage %></a>
+    <% } %>
+    <% if (lastPage != currentPage) { %>
+        <a href="/pr08/?page=<%= lastPage %>"><%= lastPage %></a>
+    <% } %>
+</section>
+
+</body>
+</html>
