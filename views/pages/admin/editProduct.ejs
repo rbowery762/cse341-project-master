@@ -12,7 +12,7 @@
     </div>
   </div>
     <main>
-        <div class="container">
+        <div class="add-edit">
             <form class="product-form" action="/admin/products/<% if (editing) { %>editProduct<% } else { %>addProduct<% } %>" method="POST">
               <input type="hidden" name="_csrf" value="<%= csrfToken%>">
                     <label for="title">Title</label>

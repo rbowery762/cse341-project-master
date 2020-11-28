@@ -50,6 +50,7 @@ const pr02Routes = require('./routes/pr02C');
 const pr03Routes = require('./routes/pr03C');
 const pr08Routes = require('./routes/pr08C');
 const pr09Routes = require('./routes/pr09C');
+const pr10Routes = require('./routes/pr10C');
 //Proper
 const adminRoutes = require('./routes/adminC');
 const shopRoutes = require('./routes/shopC');
@@ -110,6 +111,7 @@ app.use((req, res, next) => {
    .use('/pr03', pr03Routes)
    .use('/pr08', pr08Routes)
    .use('/pr09', pr09Routes)
+   .use('/pr10', pr10Routes)
    //Proper routes
    .use('/admin', adminRoutes)
    .use('/shop', shopRoutes)
