@@ -28,7 +28,7 @@ fetch('/pr10/insert', {
 })
     .then(res => res.json())
     .then(data => {
-        display(data.avengers);
+        display(data.avengers); 
     })
     .catch(console.error);
 }
