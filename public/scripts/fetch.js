@@ -7,7 +7,11 @@ const _csrf = document
     .querySelector('meta[name="_csrf"]') 
     .getAttribute('content');
 
-
+socket.on('broadcast', data => {
+     console.log("Hi");
+    // console.log(data.avengers);
+        display(data.avengers);
+})
 
     
 function display(json){
@@ -23,15 +27,7 @@ window.addEventListener("load", () => {
     fetch('/pr10/fetch')
     .then(res => res.json())
     .then(data => {
-        let displaySet = data;
-        socket.on('broadcast', function(recievedData){
-            console.log("Hi");
-            console.log(broadcastData);
-            // if(recievedData){
-             displaySet = recievedData.avengers;
-        //}
-        })
-        display(displaySet);
+        display(data);
     })
     .catch(console.error);
 }) 
@@ -44,7 +40,7 @@ fetch('/pr10/insert', {
 })
     .then(res => res.json())
     .then(data => {
-        socket.emit("broadcast", data);
+        // socket.emit("broadcast", data);
         display(data.avengers);
     })
     .catch(console.error);

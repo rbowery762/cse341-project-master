@@ -163,7 +163,7 @@ app.use((req, res, next) => {
       console.log('Client connected!');
       socket.on("broadcast", data => {
         // console.log('Data' + data)
-        socket.broadcast.emit('broadcastData' + data);
+        socket.broadcast.emit(data);
       });
     })
 
