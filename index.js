@@ -22,6 +22,8 @@ const User = require('./models/user');
 const session = require('express-session');
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const http = require('http').createServer(app);
+
 
 const MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -155,7 +157,16 @@ app.use((req, res, next) => {
   )
   .then(result => { 
     // This should be your user handling code implement following the course videos 
-    app.listen(PORT);
+    const server = app.listen(PORT);
+    const io = require('socket.io')(server);
+    io.on('connection', (socket) => {
+      console.log('Client connected!');
+      socket.on("broadcast", data => {
+        // console.log('Data' + data)
+        socket.broadcast.emit('broadcastData' + data);
+      });
+    })
+
   })
   .catch(err => {
     console.log(err); 
